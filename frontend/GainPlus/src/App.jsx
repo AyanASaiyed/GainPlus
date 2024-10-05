@@ -21,6 +21,7 @@ function App() {
         return;
       } else {
         setUser(null);
+        setFetching(false);
       }
     });
     return () => unsub();
