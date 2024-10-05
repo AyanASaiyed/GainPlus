@@ -65,7 +65,7 @@ const SignIn = ({ user }) => {
 
           <Link
             to="/signup"
-            className="text-sm hover:underline hover:text-yellow-400 mt-2 inline-block"
+            className="text-sm hover:underline hover:text-red-400 mt-2 inline-block"
           >
             Create an Account
           </Link>

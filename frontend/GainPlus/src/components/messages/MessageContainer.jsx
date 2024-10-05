@@ -26,41 +26,39 @@ const MessageContainer = () => {
       height: "200px",
       borderStyle: "dashed",
       display: "flex",
-      flexDirection:"column",
-      alignItems:"center",
-      justifyContent:"center",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
     imageContainer: {
       display: "flex",
     },
-    uploadedImageContainer:{
-      flexDirection:"column",
-      justifyContent:"left",
+    uploadedImageContainer: {
+      flexDirection: "column",
     },
-    newImageUpload:{
-      display:"flex",
-      flexDirection:"column",
-      alignItems:"center",
-      justifyContent:"center",
+    newImageUpload: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
-    imageLabel:{
-      fontSize:"30px",
+    imageLabel: {
+      fontSize: "30px",
       marginBottom: "10px",
     },
-    imageGroup:{
-      display:"flex",
-      flexDirection:"column",
-      justifyContent:"flex-end",
-      //flexDirection:"row",
-      alignItems:"flex-end",
+    imageGroup: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-end",
+      alignItems: "flex-end",
     },
-    confirmLabel:{
-      marginTop:"10px",
-      textAlign:"center",
-      border:"2px solid white",
-      padding:"10px",
-      backgroundColor:"green",
-      borderRadius:"22px"
+    confirmLabel: {
+      marginTop: "10px",
+      textAlign: "center",
+      border: "2px solid white",
+      padding: "10px",
+      backgroundColor: "green",
+      borderRadius: "22px",
     },
     messagesContainer: {
       flex: 1,
@@ -104,7 +102,7 @@ const MessageContainer = () => {
 
   return (
     <div
-      className="border-r border-t border-l text-md rounded-t-lg w-full p-4 bg-gray-900 text-white"
+      className="border text-md rounded-t-lg w-full overflow-y-scroll p-4 bg-gray-900 text-white"
       style={styles.container}
     >
       <div style={styles.messagesContainer}>
