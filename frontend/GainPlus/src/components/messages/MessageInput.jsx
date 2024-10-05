@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth, db } from "../../firebase/firebase"; // Import your Firestore instance
 import { collection, addDoc } from "firebase/firestore";
 
-const MessageInput = () => {
+const MessageInput = ({ generateResponse }) => {
   const [message, setMessage] = useState("");
 
   const sendMessage = async (e) => {
@@ -16,6 +16,8 @@ const MessageInput = () => {
         senderID: auth.currentUser.uid,
         timestamp: new Date(),
       });
+      // Get the response from the model
+      await generateResponse(message);
       setMessage("");
     } catch (error) {
       console.error("Error sending message: ", error);
