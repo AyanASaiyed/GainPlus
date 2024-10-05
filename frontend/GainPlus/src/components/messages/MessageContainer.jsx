@@ -42,7 +42,7 @@ const MessageContainer = () => {
       display:"flex",
       flexDirection:"column",
       justifyContent:"flex-end",
-      // // flexDirection:"row",
+      //flexDirection:"row",
       alignItems:"flex-end",
       
 

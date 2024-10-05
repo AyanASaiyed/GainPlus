@@ -43,7 +43,7 @@ const Home = () => {
     <section className="relative h-screen w-screen">
       <div className="fixed w-full h-20 mb-20 bg-red-950 top-0 left-0 flex items-center justify-between px-4">
 
-        <img src="./drawing.png" className="h-16 w-40"></img>
+        <img src="./drawing.png" className="h-16 w-44"></img>
         <button className="btn hover:bg-red-800" onClick={handleSignOut}>
           Sign Out
         </button>
