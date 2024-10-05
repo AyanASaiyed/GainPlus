@@ -1,19 +1,20 @@
 // Need a map to match the class_id to the class_name
+//import { sendClassesToChatbot } from '../chat/GainPlusModel';
 import axios from "axios";
 
 const classMap = {
-    0: 'ecto',
-    1: 'endo',
-    2: 'hourglass',
-    3: 'invert',
-    4: 'man',
-    5: 'meso',
-    6: 'oval',
-    7: 'rect',
-    8: 'trapezoid',
-    9: 'tri',
-    10: 'woman'
-}
+  0: "ecto",
+  1: "endo",
+  2: "hourglass",
+  3: "invert",
+  4: "man",
+  5: "meso",
+  6: "oval",
+  7: "rect",
+  8: "trapezoid",
+  9: "tri",
+  10: "woman",
+};
 
 const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
