@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { auth } from "../../firebase/firebase"; // Import the auth object
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
@@ -8,14 +9,20 @@ const Messages = () => {
   const [current, setCurrent] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "messages"), (snapshot) => {
-      const fetchedMessages = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      console.log(fetchedMessages);
-      setMessages(fetchedMessages);
-    });
+    const unsubscribe = onSnapshot(
+      query(
+        collection(db, "messages"),
+        where("senderID", "==", auth.currentUser.uid)
+      ),
+      (snapshot) => {
+        const fetchedMessages = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log(fetchedMessages);
+        setMessages(fetchedMessages);
+      }
+    );
 
     return () => unsubscribe();
   }, []);
@@ -31,7 +38,7 @@ const Messages = () => {
   const filteredMessages = messages.filter((message) => message.text);
 
   return (
-    <div className="flex flex-col h-full w-full overflow-y-scroll chat">
+    <div className="flex flex-col h-full w-full overflow-y-scroll chat absolute">
       {/* ENTRY MESSAGE HERE */}
       <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble chat-start">
         Please Enter Images of your Goal and Current Physique!
