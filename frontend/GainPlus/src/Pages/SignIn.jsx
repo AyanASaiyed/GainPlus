@@ -28,10 +28,11 @@ const SignIn = ({ user }) => {
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <h1 className="text-3xl font-extrabold text-center text-white pb-7">
-        GainPlus 💪
-      </h1>
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15">
+      <img src="./drawing.png" className="h-32 w-88 mb-8"></img>
+      <h1 className="text-4xl font-extrabold text-center  text-gray-700 mb-4">
+          Fitness with a Twist!
+        </h1>
+      <div className="w-full p-4 mt-0 rounded-lg shadow-md bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50">
         <h1 className="text-3xl font-extrabold text-center text-gray-300">
           Login
         </h1>

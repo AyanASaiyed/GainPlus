@@ -6,7 +6,7 @@ import { runModel } from "../roboflow/model";
 const MessageContainer = () => {
   const styles = {
     container: {
-      height: "80%",
+      height: "100%",
     },
     image: {
       width: "300px",
@@ -125,9 +125,9 @@ const MessageContainer = () => {
         </div>
         <button title="Submit" style={styles.confirmLabel} onClick={handleConfirm}>Confirm</button>
       </div>
-      <Messages />
     </div>
   );
 };
 
 export default MessageContainer;
+//<Messages />
