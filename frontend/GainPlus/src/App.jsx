@@ -1,7 +1,9 @@
-//import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import Home from "./Pages/Home";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,7 +15,13 @@ function App() {
     //   </Routes>
     // </BrowserRouter>
     <div className="p-4 h-screen flex items-center justify-center">
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
     </div>
     // <>
     //   <div>

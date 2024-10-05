@@ -51,36 +51,15 @@ const Home = () => {
         fontSize:"20px",
     }
   };
+
   const [isSignUpActive, setIsSignUpActive]= useState(false);
   const handleMethodChange=() =>{
     setIsSignUpActive(!isSignUpActive);
   };
+
   return (
     <section style={styles.maincontainer} className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <h2 style={styles.heading} className="font-bold"> Welcome!!</h2>
-      <form style={styles.container}>
-        {isSignUpActive && <legend style={styles.heading}>Sign In</legend>}
-        {!isSignUpActive && <legend style={styles.heading}>Sign Up</legend>}
-        
-        <fieldset>
-          <div style={styles.formGroup}>
-            <label htmlFor="email" style={styles.label}>
-              Email
-            </label>
-            <input type="text" id="email" style={styles.input} />
-          </div>
-          <div style={styles.formGroup}>
-            <label htmlFor="password" style={styles.label}>
-              Password
-            </label>
-            <input type="password" id="password" style={styles.input} />
-          </div>
-          {!isSignUpActive && <button title="Submit" style={styles.button} className="btn btn-block text-center justify-center flex-col">Sign Up</button>}
-          {isSignUpActive && <button title="Submit" style={styles.button}>Login</button>}
-        </fieldset>
-        {!isSignUpActive && <a style={styles.login} onClick={handleMethodChange}>Already have an account? Login</a>}
-        {isSignUpActive && <a style={styles.login} onClick={handleMethodChange}>New to Gain Plus? Sign Up</a>}
-      </form>
       <div></div>
     </section>
   );
