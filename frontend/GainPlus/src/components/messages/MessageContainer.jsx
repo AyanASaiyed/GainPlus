@@ -11,12 +11,12 @@ const MessageContainer = () => {
       height:"80%",
       // marginBottom:"1px",
       // padding:"15px",
-      // boxShadow:"2px 2px 1px 1px black",
+      // boxShadow:"5px 5px 1px 1px black",
       // backgroundColor:"black",
     }, 
   };
   return (
-    <div className="border text-md rounded-lg w-full p-4 bg-gray-900 text-white" style={styles.container}>
+    <div className="border-r border-t border-l text-md rounded-t-lg w-full p-4 bg-gray-900 text-white" style={styles.container}>
       
       <Messages />
     </div>

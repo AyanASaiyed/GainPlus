@@ -15,7 +15,7 @@ const MessageInput = () => {
         </button>
         <input
           type="text"
-          className="pl-10 start-2 border text-md rounded-lg block w-full p-7 bg-gray-900 text-white"
+          className="pl-10 start-2 border border-t-amber-400 text-md rounded-b-lg block w-full p-7 bg-gray-900 text-white" 
           placeholder="Enter Message"
         />
         <button
