@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
-const SignIn = () => {
+const SignIn = ({ user }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,6 +21,10 @@ const SignIn = () => {
         console.log(errCode, errMessage);
       });
   };
+
+  if (user) {
+    return <Navigate to="/"/>
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
