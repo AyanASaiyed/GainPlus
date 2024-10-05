@@ -16,7 +16,6 @@ const Home = () => {
     formGroup: {
         display:"flex",
       flexDirection: "column",
-<<<<<<< HEAD
       alignItems:"flex-start",
       
     },
@@ -30,16 +29,6 @@ const Home = () => {
         padding: "10px",
         width:"90%",
 
-=======
-      alignItems: "center",
-    },
-    label: {
-      fontSize: "25px",
-      padding: "5px",
-    },
-    input: {
-      fontSize: "25px",
->>>>>>> 5d10eece6ca4baeb5eb2ad612d09d7666b4429e0
     },
     button:{
         marginTop:"20px",
