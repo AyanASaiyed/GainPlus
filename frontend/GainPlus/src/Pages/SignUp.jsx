@@ -12,6 +12,7 @@ const SignUp = () => {
   };
 
   const handleSignUp = () => {
+    if (!email || !password) return;
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -64,7 +65,7 @@ const SignUp = () => {
             to="/login"
             className="text-sm hover:underline hover:text-yellow-400 mt-2 inline-block"
           >
-            Create an Account
+            Have an Account? Login
           </Link>
           <div>
             <button

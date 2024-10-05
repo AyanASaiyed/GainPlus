@@ -1,12 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
 const SignIn = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) return;
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errCode = error.code;
+        const errMessage = error.message;
+        console.log(errCode, errMessage);
+      });
   };
 
   return (
@@ -28,8 +41,8 @@ const SignIn = () => {
               type="text"
               placeholder="Enter Email"
               className="w-full input input-bordered h-10 text-white"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
