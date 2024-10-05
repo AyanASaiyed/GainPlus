@@ -13,17 +13,24 @@ const Home = () => {
 
   return (
     <section className="relative h-screen w-screen">
-      <div className="flex w-full h-12 bg-red-950 fixed top-0 left-0">
-        <h2 className="font-bold text-3xl start-0 pl-3">
+      {/* Red bar at the top */}
+      <div className="fixed w-full h-12 bg-red-950 top-0 left-0 flex items-center justify-between px-4">
+        <h2 className="font-bold text-3xl">
           G<span className="text-black">Ai</span>nPlus💪
         </h2>
-        <button className="btn end-0 absolute flex hover:bg-red-800" onClick={handleSignOut}>
+        <button
+          className="btn hover:bg-red-800"
+          onClick={handleSignOut}
+        >
           Sign Out
         </button>
       </div>
-      <div className="flex flex-col items-center justify-center w-full h-full">
+
+      {/* Main content below the red bar */}
+      <div className="flex flex-col items-center justify-center w-full h-full pt-12">
+        {/* Add padding-top to prevent content from overlapping with the fixed bar */}
         <MessageContainer />
-        <MessageInput/>
+        <MessageInput />
       </div>
     </section>
   );
