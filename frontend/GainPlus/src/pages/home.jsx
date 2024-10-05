@@ -6,21 +6,21 @@ const Home = () => {
       padding: "10px",
       borderRadius: "5px",
     },
-    heading:{
-        fontSize:"30px",
-        textAlign:"left",
+    heading: {
+      fontSize: "30px",
+      textAlign: "left",
     },
     formGroup: {
       display: "flex",
       flexDirection: "column",
-      alignItems:"center",
+      alignItems: "center",
     },
-    label:{
-        fontSize:"25px",
-        padding:"5px",
+    label: {
+      fontSize: "25px",
+      padding: "5px",
     },
-    input:{
-        fontSize:"25px",
+    input: {
+      fontSize: "25px",
     },
   };
   return (
@@ -33,13 +33,13 @@ const Home = () => {
             <label htmlFor="email" style={styles.label}>
               Email
             </label>
-            <input type="text" id="email" style={styles.input}/>
-            </div>
-            <div style={styles.formGroup}>
+            <input type="text" id="email" style={styles.input} />
+          </div>
+          <div style={styles.formGroup}>
             <label htmlFor="password" style={styles.label}>
               Password
             </label>
-            <input type="password" id="password" style={styles.input}/>
+            <input type="password" id="password" style={styles.input} />
           </div>
         </fieldset>
       </form>
