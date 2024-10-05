@@ -10,7 +10,7 @@ const Message = () => {
       marginBottom:"auto",
       padding:"15px",
       boxShadow:"2px 2px 1px 1px black",
-      backgroundColor:"black",
+      // backgroundColor:"black",
     }, 
     messageContainer:{
       width: "40%",
