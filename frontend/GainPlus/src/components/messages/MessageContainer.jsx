@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Message from "./Message";
 import Messages from "./Messages";
+import { runModel } from "../roboflow/model";
 
 const MessageContainer = () => {
   const styles = {
@@ -69,6 +70,12 @@ const MessageContainer = () => {
   };
    function handleConfirm(e){
     setConfirm(true);
+    if (yourImage) {
+      runModel(yourImage);
+    }
+    if (desiredImage) {
+      runModel(desiredImage);
+    }
   };
 
   return (
