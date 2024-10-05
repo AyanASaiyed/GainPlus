@@ -1,8 +1,8 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 
-const genAI = new GoogleGenerativeAI(AIzaSyDd-qpJklgdgNN1JxXCa-qM45s8nYT9sf8);
-const fileManager = new GoogleAIFileManager(AIzaSyDd-qpJklgdgNN1JxXCa-qM45s8nYT9sf8);
+const genAI = new GoogleGenerativeAI('AIzaSyDd-qpJklgdgNN1JxXCa-qM45s8nYT9sf8');
+const fileManager = new GoogleAIFileManager('AIzaSyDd-qpJklgdgNN1JxXCa-qM45s8nYT9sf8');
 const safetySettings = [
     {
         category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -47,6 +47,17 @@ export const getModel = (modelType) => {
 
     return model;
 }
+
+export const sendClassesToChatbot = async (classes) => {
+    const model = getModel('gemini-1.5-flash');
+    const prompt = `The top 3 predictions are: ${classes.join(', ')}`;
+    
+    const result = await model.generateContent([
+        { text: prompt }
+    ]);
+
+    return result.response.text();
+};
 
 // The following should be implemented in the messaging component
 
