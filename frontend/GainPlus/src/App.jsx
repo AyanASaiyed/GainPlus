@@ -9,6 +9,7 @@ import { auth } from "./firebase/firebase";
 import { useEffect, useState } from "react";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { onAuthStateChanged } from "firebase/auth";
+import MessageContainer from "./components/messages/MessageContainer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,7 +41,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/message" element={<Message/>}/>
+          <Route path="/message" element={<MessageContainer/>}/>
 
           <Route
             path="/"
