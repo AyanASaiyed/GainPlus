@@ -13,7 +13,7 @@ const MessageInput = ({ onSendMessage }) => {
   };
 
   return (
-    <form className="w-full">
+    <form className="w-full" onSubmit={handleSubmit}>
       {" "}
       {/* Changed to w-full */}
       <div className="relative flex items-center justify-center w-full">
