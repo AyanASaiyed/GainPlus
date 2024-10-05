@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth, db } from "../../firebase/firebase"; // Import your Firestore instance
 import { collection, addDoc } from "firebase/firestore";
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const MessageInput = () => {
   const [message, setMessage] = useState("");
@@ -24,18 +24,25 @@ const MessageInput = () => {
   };
 
   return (
-    <form onSubmit={sendMessage} className="px-4 my-3 w-1/2">
-      <div className="flex items-center justify-center">
+    <form
+      onSubmit={sendMessage}
+      style={{ marginTop: "4px", marginBottom: "0px" }}
+      className="px-4 w-full flex justify-center"
+    >
+      <div className="relative w-1/2">
+        <span className="absolute inset-y-0 left-4 flex items-center text-gray-500">
+          <i className="bi bi-chat-right-text-fill"></i>
+        </span>
         <input
           type="text"
-          className="pl-10 start-2 border text-md rounded-lg block w-full p-7 bg-gray-900 text-white"
+          className="pl-10 pr-4 border rounded-lg block w-full p-4 bg-gray-900 text-white"
           placeholder="Enter Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
         <button
           type="submit"
-          className="absolute inset-y-0 end-0 flex items-center pe-3"
+          className="absolute inset-y-0 right-0 flex items-center pr-4 text-white"
         >
           <i className="bi bi-send-fill"></i>
         </button>
