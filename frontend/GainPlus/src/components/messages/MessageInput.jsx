@@ -13,8 +13,10 @@ const MessageInput = ({ onSendMessage }) => {
   };
 
   return (
-    <form className="px-4 my-3 w-1/2" onSubmit={handleSubmit}>
-      <div className="w-full relative flex items-center justify-center">
+    <form className="w-full">
+      {" "}
+      {/* Changed to w-full */}
+      <div className="relative flex items-center justify-center w-full">
         <button
           type="submit"
           className="pl-4 absolute start-0 flex items-center pe-3"
@@ -23,7 +25,7 @@ const MessageInput = ({ onSendMessage }) => {
         </button>
         <input
           type="text"
-          className="pl-10 start-2 border text-md rounded-lg block w-full p-7 bg-gray-900 text-white"
+          className="pl-10 start-2 border border-t-amber-400 text-md rounded-b-lg block w-full p-7 bg-gray-900 text-white" 
           placeholder="Enter Message"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
