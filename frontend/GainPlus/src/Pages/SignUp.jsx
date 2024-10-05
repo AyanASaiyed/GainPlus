@@ -1,12 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
 const SignUp = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  };
+
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errCode = error.code;
+        const errMessage = error.message;
+        console.log(errCode, errMessage);
+      });
   };
 
   return (
@@ -28,8 +43,8 @@ const SignUp = () => {
               type="text"
               placeholder="Enter Email"
               className="w-full input input-bordered h-10 text-white"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -54,7 +69,7 @@ const SignUp = () => {
           <div>
             <button
               className="btn btn-block btn-sm mt-2 hover:bg-red-950"
-              onClick={handleSubmit}
+              onClick={handleSignUp}
             >
               Sign Up
             </button>
