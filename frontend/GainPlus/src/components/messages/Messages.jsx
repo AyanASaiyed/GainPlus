@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { auth } from "../../firebase/firebase"; // Import the auth object
+import { runModel } from "../roboflow/model";
 
 const Messages = () => {
   const styles = {

@@ -26,20 +26,14 @@ const blobToBase64 = (blob) => {
 };
 
 export const runModel = async (imgBlob) => {
-    if (!(imgBlob instanceof Blob)) {
-        console.error("Invalid Blob object:", imgBlob);
-        return;
-    }
-    
-    const imglink = await blobToBase64(imgBlob);
-    console.log("Running model with base64 image: ", imglink);
+    console.log("Running model with base64 image: ", imgBlob);
 
     axios({
         method: "POST",
         url: "https://detect.roboflow.com/bodymeasure-sotdp/5",
         params: {
             api_key: "TDOTWEzAa3JtoQw2BdLG",
-            image: imglink,
+            image: imgBlob,
         }
     })
 
