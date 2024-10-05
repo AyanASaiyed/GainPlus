@@ -52,15 +52,9 @@ const Home = () => {
     }
   };
 
-  const [isSignUpActive, setIsSignUpActive]= useState(false);
-  const handleMethodChange=() =>{
-    setIsSignUpActive(!isSignUpActive);
-  };
-
   return (
-    <section style={styles.maincontainer} className="flex flex-col items-center justify-center min-w-96 mx-auto">
+    <section className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <h2 style={styles.heading} className="font-bold"> Welcome!!</h2>
-      <div></div>
     </section>
   );
 };

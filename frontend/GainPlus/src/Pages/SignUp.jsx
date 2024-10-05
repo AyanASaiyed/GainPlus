@@ -27,7 +27,7 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <h1 className="text-3xl font-extrabold text-center text-white">
+      <h1 className="text-3xl font-extrabold text-center text-white pb-7">
         GainPlus 💪
       </h1>
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15">
