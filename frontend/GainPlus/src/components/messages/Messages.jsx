@@ -38,13 +38,8 @@ const Messages = () => {
   const filteredMessages = messages.filter((message) => message.text);
 
   return (
-    <div className="flex flex-col h-full w-full overflow-y-scroll chat absolute">
-      {/* ENTRY MESSAGE HERE */}
-      <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble chat-start">
-        Please Enter Images of your Goal and Current Physique!
-      </div>
-
-      <div className="flex-1 w-full bg-gray-900 p-4 flex flex-col items-end">
+    <div className="flex flex-col chat">
+      <div className="flex-1 bg-gray-900 relative p-4 flex flex-col items-end">
         {filteredMessages.map((message) => (
           <div
             key={message.id}

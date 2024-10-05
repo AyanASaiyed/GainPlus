@@ -40,17 +40,16 @@ const Home = () => {
   };
 
   return (
-    <section className="relative h-screen w-screen">
+    <section className="relative h-full w-full flex-col">
       <div className="fixed w-full h-20 mb-20 bg-red-950 top-0 left-0 flex items-center justify-between px-4">
-
         <img src="./drawing.png" className="h-16 w-40"></img>
         <button className="btn hover:bg-red-800" onClick={handleSignOut}>
           Sign Out
         </button>
       </div>
-      <div className="flex flex-col items-center justify-center w-full h-full pt-12">
-        <MessageContainer messages={messages} />{" "}
-        <MessageInput onSendMessage={sendMessage} />{" "}
+      <div className="flex flex-col items-center justify-center h-screen">
+        <MessageContainer messages={messages} />
+        <MessageInput onSendMessage={sendMessage} />
       </div>
     </section>
   );
