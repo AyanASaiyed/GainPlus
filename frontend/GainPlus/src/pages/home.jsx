@@ -16,7 +16,6 @@ const Home = () => {
     formGroup: {
         display:"flex",
       flexDirection: "column",
-<<<<<<< HEAD
       alignItems:"flex-start",
       
     },
@@ -29,8 +28,6 @@ const Home = () => {
         fontSize:"15px",
         padding: "10px",
         width:"90%",
-
-=======
       alignItems: "center",
     },
     label: {
@@ -39,7 +36,6 @@ const Home = () => {
     },
     input: {
       fontSize: "25px",
->>>>>>> 5d10eece6ca4baeb5eb2ad612d09d7666b4429e0
     },
     button:{
         marginTop:"20px",
@@ -60,8 +56,8 @@ const Home = () => {
     setIsSignUpActive(!isSignUpActive);
   };
   return (
-    <section style={styles.maincontainer}>
-      <h2 style={styles.heading}> Welcome!!</h2>
+    <section style={styles.maincontainer} className="flex flex-col items-center justify-center min-w-96 mx-auto">
+      <h2 style={styles.heading} className="font-bold"> Welcome!!</h2>
       <form style={styles.container}>
         {isSignUpActive && <legend style={styles.heading}>Sign In</legend>}
         {!isSignUpActive && <legend style={styles.heading}>Sign Up</legend>}
@@ -79,7 +75,7 @@ const Home = () => {
             </label>
             <input type="password" id="password" style={styles.input} />
           </div>
-          {!isSignUpActive && <button title="Submit" style={styles.button}>Sign Up</button>}
+          {!isSignUpActive && <button title="Submit" style={styles.button} className="btn btn-block text-center justify-center flex-col">Sign Up</button>}
           {isSignUpActive && <button title="Submit" style={styles.button}>Login</button>}
         </fieldset>
         {!isSignUpActive && <a style={styles.login} onClick={handleMethodChange}>Already have an account? Login</a>}
