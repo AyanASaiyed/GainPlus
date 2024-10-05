@@ -1,34 +1,36 @@
-import React from 'react'
+import React from "react";
+import useMessagesSent from "../../hooks/useMessagesSent";
 
-const Message = () => {
+const Message = ({ text }) => {
+  const { messages, loading } = useMessagesSent();
+
   const styles = {
-    // container:{
-    //   border:" 1px solid black",
-    //   borderRadius:"7px",
-    //   width:"95%",
-    //   height:"80%",
-    //   marginBottom:"auto",
-    //   padding:"15px",
-    //   boxShadow:"2px 2px 1px 1px black",
-    //   // backgroundColor:"black",
-    // }, 
-    messageContainer:{
+    messageContainer: {
       width: "40%",
-      height:"auto",
-      textAlign:"justify",
-      marginLeft:"auto",
+      textAlign: "justify",
+      marginLeft: "auto",
     },
   };
+
   return (
-    
-    // <div style={styles.container}>
     <div className="chat chat-end" style={styles.messageContainer}>
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15 chat-bubble">Your Message</div>
-   {/* </div> */}
-   </div>
+      <div className="px-4 flex-1 overflow-auto">
+        {messages.length > 0 &&
+          messages.map((message) => (
+            <div key={message._id}>
+              <Message message={message} />
+            </div>
+          ))}
 
-    
-  )
-}
+        {loading && [...Array(3)].map()}
 
-export default Message
+        {!loading && messages.length === 0 && (
+          <p className="text-center">
+            Begin your conversation by sending a message!
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
+export default Message;

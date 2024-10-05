@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "firebase": "^10.14.0"
-  },
-  "devDependencies": {
-    "daisyui": "^4.12.12"
-  }
-}
