@@ -80,7 +80,7 @@ const MessageContainer = () => {
       className="border text-md rounded-t-lg w-full overflow-y-scroll p-4 bg-gray-900 text-white"
       style={styles.container}
     >
-      <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble chat-start">
+      <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble chat-start text-white">
         Please Enter Images of your Goal and Current Physique!
       </div>
       <div style={styles.imageGroup}>
