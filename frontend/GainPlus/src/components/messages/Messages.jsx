@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where, orderBy } from "firebase/firestore";
 import { auth } from "../../firebase/firebase"; // Import the auth object
 import { runModel } from "../roboflow/model";
 
@@ -81,7 +81,8 @@ const Messages = () => {
     const unsubscribe = onSnapshot(
       query(
         collection(db, "messages"),
-        where("senderID", "==", auth.currentUser.uid)
+        where("senderID", "==", auth.currentUser.uid),
+        orderBy("timestamp", "asc")
       ),
       (snapshot) => {
         const fetchedMessages = snapshot.docs.map((doc) => ({
@@ -198,6 +199,7 @@ const Messages = () => {
             key={message.id}
             className="pl-4 pt-2 pb-2 bg-black chat-bubble mb-2 self-end"
           >
+            {/* Displaying text message on the container */}
             <p className="text-white">{message.text}</p>
           </div>
         ))}

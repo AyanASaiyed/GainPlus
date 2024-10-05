@@ -105,14 +105,57 @@ const MessageContainer = () => {
       className="border text-md rounded-t-lg w-full overflow-y-scroll p-4 bg-gray-900 text-white"
       style={styles.container}
     >
-      <div style={styles.messagesContainer}>
-        
-        <Messages messages={messages} />
-        
+      <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble chat-start text-white">
+        Please Enter Images of your Goal and Current Physique!
       </div>
-
-      <div style={styles.inputContainer}>
-        <MessageInput onSendMessage={sendMessage} />
+      <div style={styles.imageGroup}>
+        <div style={styles.imageContainer}>
+          <div style={styles.imageStyle}>
+            {!yourImage ? (
+              <>
+                <div style={styles.newImageUpload}>
+                  <h2 style={styles.imageLabel}>Your Photo</h2>
+                  <input type="file" onChange={handleYourImage}></input>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={styles.uploadedImageContainer}>
+                  <img style={styles.image} src={yourImage} />
+                  <h2>Re-upload Your Photo</h2>
+                  <input type="file" onChange={handleYourImage}></input>
+                </div>
+              </>
+            )}
+          </div>
+          <div style={styles.imageStyle}>
+            {!desiredImage ? (
+              <>
+                <div style={styles.newImageUpload}>
+                  <h2 style={styles.imageLabel}>Desired Photo</h2>
+                  <input type="file" onChange={handleDesiredImage}></input>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={styles.uploadedImageContainer}>
+                  <img style={styles.image} src={desiredImage} />
+                  <h2>Re-upload desired Photo</h2>
+                  <input type="file" onChange={handleDesiredImage}></input>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <button
+          title="Submit"
+          style={styles.confirmLabel}
+          onClick={handleConfirm}
+        >
+          Confirm
+        </button>
+        {/* Display the messages */}
+        <Messages />
       </div>
     </div>
   );
