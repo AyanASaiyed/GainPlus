@@ -18,7 +18,6 @@ const MessageContainer = () => {
 
   return (
     <div className="border-r border-t border-l text-md rounded-t-lg w-full p-4 bg-gray-900 text-white" style={styles.container}>
-      
       <Messages />
     </div>
   );

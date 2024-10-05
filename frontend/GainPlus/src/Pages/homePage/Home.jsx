@@ -16,6 +16,7 @@ const Home = () => {
         const docRef = await addDoc(collection(db, "messages"), {
           message: messageText,
           senderID: authUser.uid,
+          time: new Date(),
         });
         console.log("Messaged saved on Firestore");
       } else {

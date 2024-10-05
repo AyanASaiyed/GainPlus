@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../../firebase/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 
-const Messages = ({ messages }) => {
+const Messages = () => {
+  const [messages, setMessages] = useState([]);
   const [goal, setGoal] = useState(null);
   const [current, setCurrent] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "messages"), (snapshot) => {
+      const fetchedMessages = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log(fetchedMessages);
+      setMessages(fetchedMessages);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   function handleGoal(e) {
     setGoal(URL.createObjectURL(e.target.files[0]));
@@ -12,33 +28,27 @@ const Messages = ({ messages }) => {
     setCurrent(URL.createObjectURL(e.target.files[0]));
   }
 
-  return (
-    <div className="flex flex-col overflow-y-scroll chat chat-start">
+  const filteredMessages = messages.filter((message) => message.text);
 
-      <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble">
+  return (
+    <div className="flex flex-col h-full w-full overflow-y-scroll chat">
+      {/* ENTRY MESSAGE HERE */}
+      <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble chat-start">
         Please Enter Images of your Goal and Current Physique!
       </div>
 
-      <div className="flex flex-col items-end w-full">
-        <div className="pl-4 pt-2 pb-2 ml-auto">
-          <label className="block text-white mb-2">Goal Physique</label>
-          <input
-            type="file"
-            className="block text-white bg-black"
-            onChange={handleGoal}
-          />
-          {goal && <img src={goal} alt="Goal Physique" className="mt-2" />}
-        </div>
-
-        <div className="pl-4 pt-2 pb-2 ml-auto">
-          <label className="block text-white mb-2">Current Physique</label>
-          <input
-            type="file"
-            className="block text-white bg-black"
-            onChange={handleCurrent}
-          />
-          {current && <img src={current} alt="Current Physique" className="mt-2" />}
-        </div>
+      <div className="flex-1 w-full bg-gray-900 p-4 flex flex-col items-end">
+        {filteredMessages.map((message) => (
+          <div
+            key={message.id}
+            className="pl-4 pt-2 pb-2 bg-black chat-bubble mb-2 self-end"
+          >
+            <p className="text-white">{message.text}</p>
+          </div>
+        ))}
+        {filteredMessages.length === 0 && (
+          <p className="text-white text-center">No messages to display.</p>
+        )}
       </div>
     </div>
   );

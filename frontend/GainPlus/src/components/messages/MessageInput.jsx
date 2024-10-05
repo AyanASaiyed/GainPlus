@@ -1,34 +1,36 @@
 import React, { useState } from "react";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { auth, db } from "../../firebase/firebase"; // Import your Firestore instance
+import { collection, addDoc } from "firebase/firestore";
 
-const MessageInput = ({ onSendMessage }) => {
-  const [inputValue, setInputValue] = useState("");
+const MessageInput = () => {
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
-    if (inputValue.trim()) {
-      onSendMessage(inputValue);
-      setInputValue("");
+
+    if (message.trim() === "") return;
+
+    try {
+      await addDoc(collection(db, "messages"), {
+        text: message,
+        senderID: auth.currentUser.uid,
+        timestamp: new Date(),
+      });
+      setMessage("");
+    } catch (error) {
+      console.error("Error sending message: ", error);
     }
   };
 
   return (
-    <form className="w-full" onSubmit={handleSubmit}>
-      {" "}
-      {/* Changed to w-full */}
-      <div className="relative flex items-center justify-center w-full">
-        <button
-          type="submit"
-          className="pl-4 absolute start-0 flex items-center pe-3"
-        >
-          <i className="bi bi-mic-fill"></i>
-        </button>
+    <form onSubmit={sendMessage} className="px-4 my-3 w-1/2">
+      <div className="w-full relative flex items-center justify-center">
         <input
           type="text"
-          className="pl-10 start-2 border border-t-amber-400 text-md rounded-b-lg block w-full p-7 bg-gray-900 text-white" 
+          className="pl-10 start-2 border text-md rounded-lg block w-full p-7 bg-gray-900 text-white"
           placeholder="Enter Message"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
         <button
           type="submit"
