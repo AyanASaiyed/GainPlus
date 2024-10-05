@@ -129,6 +129,7 @@ const MessageContainer = () => {
         >
           Confirm
         </button>
+        {/* Display the messages */}
         <Messages />
       </div>
     </div>
