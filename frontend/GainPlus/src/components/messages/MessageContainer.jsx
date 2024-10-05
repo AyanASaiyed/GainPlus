@@ -53,8 +53,6 @@ const MessageContainer = () => {
       justifyContent:"flex-end",
       //flexDirection:"row",
       alignItems:"flex-end",
-      
-
     },
     confirmLabel:{
       marginTop:"10px",
@@ -71,6 +69,9 @@ const MessageContainer = () => {
     },
     inputContainer: {
       flexShrink: 0,
+    },
+    fileInput: {
+      display: "none",
     },
   };
 
@@ -101,77 +102,17 @@ const MessageContainer = () => {
     await saveMessageToFirestore(messageText);
   };
 
-  const [yourImage, setYourImage] = useState();
-  const [desiredImage, setDesiredImage] = useState();
-  const [confirm, setConfirm]= useState(false);
-  function handleYourImage(e) {
-    console.log(e.target.files);
-    setYourImage(URL.createObjectURL(e.target.files[0]));
-  };
-  function handleDesiredImage(e) {
-    console.log(e.target.files);
-    setDesiredImage(URL.createObjectURL(e.target.files[0]));
-  };
-   function handleConfirm(e){
-    setConfirm(true);
-    if (yourImage) {
-      runModel(yourImage);
-    }
-    if (desiredImage) {
-      runModel(desiredImage);
-    }
-  };
-
   return (
     <div
       className="border-r border-t border-l text-md rounded-t-lg w-full p-4 bg-gray-900 text-white"
       style={styles.container}
     >
       <div style={styles.messagesContainer}>
+        
         <Messages messages={messages} />
+        
       </div>
-      <div style={styles.imageGroup}>
-        <div style={styles.imageContainer}>
-          <div style={styles.imageStyle}>
-            {!yourImage ? (
-              <>
-              <div style={styles.newImageUpload}>
-                <h2 style={styles.imageLabel}>Your Photo</h2>
-                <input type="file" onChange={handleYourImage}></input>
-                </div>
-              </>
-            ) : (
-              <>
-              <div style={styles.uploadedImageContainer}>
-                <img style={styles.image} src={yourImage} />
-                <h2 >Change Photo</h2>
-                <input type="file" onChange={handleYourImage}></input>
-                </div>
-              </>
-            )}
-          </div>
-          <div style={styles.imageStyle}>
-            {!desiredImage ? (
-              <>
-              <div style={styles.newImageUpload}>
-                <h2 style={styles.imageLabel}>Desired Photo</h2>
-                <input type="file" onChange={handleDesiredImage}></input>
-                </div>
-              </>
-            ) : (
-              <>
-              <div style={styles.uploadedImageContainer}>
-                <img style={styles.image} src={desiredImage} />
-                <h2>Change Photo</h2>
-                <input type="file" onChange={handleDesiredImage}></input>
-                </div>
-              </>
-            )}
-          </div>
-          
-        </div>
-        <button title="Submit" style={styles.confirmLabel} onClick={handleConfirm}>Submit Before and After Photos</button>
-      </div>
+
       <div style={styles.inputContainer}>
         <MessageInput onSendMessage={sendMessage} />
       </div>
