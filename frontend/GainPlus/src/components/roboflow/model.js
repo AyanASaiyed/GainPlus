@@ -1,5 +1,5 @@
 // Need a map to match the class_id to the class_name
-import { sendClassesToChatbot } from '../chat/GainPlusModel';
+//import { sendClassesToChatbot } from '../chat/GainPlusModel';
 
 const classMap = {
     0: 'ecto',
@@ -15,14 +15,13 @@ const classMap = {
     10: 'woman'
 }
 
-
 //Image Inference
 axios({
     method: "POST",
     url: "https://detect.roboflow.com/bodymeasure-sotdp/5",
     params: {
         api_key: "TDOTWEzAa3JtoQw2BdLG",
-        image: "https://i.pinimg.com/originals/d3/63/29/d36329e763508b4014dc517971c4d559.jpg",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4o53UmTlzDRFf8xEqOnnht0k1ndB5FwxJ-g&s",
     }
 })
 
@@ -54,12 +53,12 @@ axios({
     }
 
     //Send classes to the LLM chatbot through a POST request
-    try {
-        const chatbotResponse = await sendClassesToChatbot(classes);
-        console.log("Chatbot response:", chatbotResponse);
-    } catch (error) {
-        console.error("Error sending to chatbot:", error);
-    }
+    //try {
+    //    const chatbotResponse = await sendClassesToChatbot(classes);
+    //    console.log("Chatbot response:", chatbotResponse);
+    //} catch (error) {
+    //    console.error("Error sending to chatbot:", error);
+    //}
 })
 
 .catch(function(error) {

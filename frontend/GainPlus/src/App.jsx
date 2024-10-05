@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { onAuthStateChanged } from "firebase/auth";
 import MessageContainer from "./components/messages/MessageContainer";
+import "./components/roboflow/model.js";
 
 function App() {
   const [user, setUser] = useState(null);
