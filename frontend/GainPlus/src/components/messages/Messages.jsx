@@ -38,9 +38,9 @@ const Messages = () => {
   const filteredMessages = messages.filter((message) => message.text);
 
   return (
-    <div className="flex flex-col h-full w-full overflow-y-scroll chat absolute">
+    <div className="flex flex-col h-full w-full overflow-y-auto">
       {/* ENTRY MESSAGE HERE */}
-      <div className="pl-4 pt-6 pb-6 rounded-lg bg-black chat-bubble chat-start">
+      <div className="pl-4 pt-1 pb-6 rounded-lg bg-black chat-bubble chat-start">
         Please Enter Images of your Goal and Current Physique!
       </div>
 

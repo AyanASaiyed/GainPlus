@@ -23,11 +23,11 @@ const MessageInput = () => {
   };
 
   return (
-    <form onSubmit={sendMessage} className="px-4 my-3 w-1/2">
+    <form onSubmit={sendMessage} className="px-4 my-3 w-full">
       <div className="w-full relative flex items-center justify-center">
         <input
           type="text"
-          className="pl-10 start-2 border text-md rounded-lg block w-full p-7 bg-gray-900 text-white"
+          className="start-2 border text-md rounded-lg block w-full p-4 bg-gray-900 text-white"
           placeholder="Enter Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
