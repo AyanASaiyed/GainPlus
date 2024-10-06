@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import { auth } from "../../firebase/firebase"; // Import the auth object
 import { runModel } from "../roboflow/model";
+import toast from "react-hot-toast";
 
 const Messages = () => {
   const styles = {
@@ -120,22 +121,33 @@ const Messages = () => {
   const handleYourImage = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setYourImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      const fileType = file.type;
+      if (fileType !== "image/jpeg" && fileType !== "image/png") {
+        toast.error("Please enter a jpg or png file");
+        return;
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setYourImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
   const handleDesiredImage = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setDesiredImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      const fileType = file.type;
+      if (fileType !== "image/jpeg" && fileType !== "image/png") {
+        toast.error("Please enter a jpg or a png file");
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setDesiredImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 

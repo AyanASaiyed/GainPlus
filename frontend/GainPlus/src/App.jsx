@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { ProtectedRoute } from "./components/protectedRoute";
 import { onAuthStateChanged } from "firebase/auth";
 import MessageContainer from "./components/messages/MessageContainer";
+import { Toaster } from "react-hot-toast";
 import "./components/roboflow/model.js";
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
     <div className="p-4 h-screen flex items-center justify-center">
       <BrowserRouter>
         <Routes>
-          <Route path="/message" element={<Message/>}/>
+          <Route path="/message" element={<Message />} />
           <Route
             path="/"
             element={
@@ -50,9 +51,9 @@ function App() {
           />
           <Route path="/login" element={<SignIn user={user} />} />
           <Route path="/signup" element={<SignUp user={user} />} />
-          
         </Routes>
       </BrowserRouter>
+      <Toaster />
     </div>
   );
 }
