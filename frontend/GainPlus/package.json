@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "rollup src/components/chat/GainPlusChat.js --file ../../netlify/functions/databricks-proxy.js --format cjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
