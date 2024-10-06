@@ -2,36 +2,40 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import toast from "react-hot-toast";
 
 const SignIn = ({ user }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) return;
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        toast.success("Successfully signed in!");
       })
       .catch((error) => {
-        const errCode = error.code;
         const errMessage = error.message;
-        console.log(errCode, errMessage);
+        console.log(errMessage);
+        toast.error(errMessage);
       });
   };
 
   if (user) {
-    return <Navigate to="/"/>
+    return <Navigate to="/" />;
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <h1 className="text-3xl font-extrabold text-center text-white pb-7">
-        GainPlus 💪
+      <img src="./drawing.png" className="h-32 w-88 mb-8"></img>
+      <h1 className="text-4xl font-extrabold text-center  text-gray-700 mb-4">
+        Fitness with a Twist!
       </h1>
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15">
+      <div className="w-full p-4 mt-0 rounded-lg shadow-md bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50">
         <h1 className="text-3xl font-extrabold text-center text-gray-300">
           Login
         </h1>
@@ -64,7 +68,7 @@ const SignIn = ({ user }) => {
 
           <Link
             to="/signup"
-            className="text-sm hover:underline hover:text-yellow-400 mt-2 inline-block"
+            className="text-sm hover:underline hover:text-red-400 mt-2 inline-block"
           >
             Create an Account
           </Link>

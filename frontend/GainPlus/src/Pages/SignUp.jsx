@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import toast from "react-hot-toast";
 
 const SignUp = ({ user }) => {
   const [email, setEmail] = useState("");
@@ -17,11 +18,13 @@ const SignUp = ({ user }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        toast.success("Succesfully Created Account!");
       })
       .catch((error) => {
         const errCode = error.code;
         const errMessage = error.message;
         console.log(errCode, errMessage);
+        toast.error(errMessage);
       });
   };
 
@@ -31,10 +34,11 @@ const SignUp = ({ user }) => {
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <h1 className="text-3xl font-extrabold text-center text-white pb-7">
-        GainPlus 💪
+      <img src="./drawing.png" className="h-32 w-88 mb-8"></img>
+      <h1 className="text-4xl font-extrabold text-center  text-gray-700 mb-4">
+        Fitness with a Twist!
       </h1>
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15">
+      <div className="w-full p-4 mt-0 rounded-lg shadow-md bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50">
         <h1 className="text-3xl font-extrabold text-center text-gray-300">
           Sign Up
         </h1>
@@ -67,13 +71,13 @@ const SignUp = ({ user }) => {
 
           <Link
             to="/login"
-            className="text-sm hover:underline hover:text-yellow-400 mt-2 inline-block"
+            className="text-sm hover:underline hover:text-red-400 mt-2 inline-block"
           >
             Have an Account? Login
           </Link>
           <div>
             <button
-              className="btn btn-block btn-sm mt-2 hover:bg-red-950"
+              className="btn btn-block btn-sm mt-2 hover:bg-red-500"
               onClick={handleSignUp}
             >
               Sign Up

@@ -4,5 +4,8 @@ export default {
   theme: {
     extend: {},
   },
+  fontFamily: {
+    sans: ["Inter", "system-ui"],
+  },
   plugins: [require("daisyui")],
 };
