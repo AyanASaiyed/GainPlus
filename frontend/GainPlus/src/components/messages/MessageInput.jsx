@@ -12,11 +12,12 @@ const MessageInput = () => {
     if (message.trim() === "") return;
 
     try {
-      await addDoc(collection(db, "messages"), {
+      const userMessage = {
         text: message,
         senderID: auth.currentUser.uid,
         timestamp: new Date(),
-      });
+      }
+      await addDoc(collection(db, "messages"), userMessage);
       setMessage("");
     } catch (error) {
       console.error("Error sending message: ", error);

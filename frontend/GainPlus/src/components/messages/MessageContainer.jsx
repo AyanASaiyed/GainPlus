@@ -7,6 +7,9 @@ import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import MessageInput from "./MessageInput";
 import { auth, db } from "../../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import axios from "axios";
+import { blobToBase64, runModel } from "../roboflow/model";
+
 
 const MessageContainer = () => {
   const styles = {
@@ -122,7 +125,7 @@ const MessageContainer = () => {
     if (yourImageFile) {
       const yourImageRef = ref(
         imageDb,
-        `yourImage/${yourImageFile.name + v4()}`
+        `${auth.currentUser.uid}/yourImage/${yourImageFile.name + v4()}`
       );
       await uploadBytes(yourImageRef, yourImageFile);
       const yourImageURL = await getDownloadURL(yourImageRef);
@@ -131,23 +134,46 @@ const MessageContainer = () => {
     if (desiredImageFile) {
       const desiredImageRef = ref(
         imageDb,
-        `desiredImage/${desiredImageFile.name + v4()}`
+        `${auth.currentUser.uid}/desiredImage/${desiredImageFile.name + v4()}`
       );
       await uploadBytes(desiredImageRef, desiredImageFile);
       const desiredImageURL = await getDownloadURL(desiredImageRef);
       setDesiredImage(desiredImageURL);
     }
+
+    const yourImageBase64 = await blobToBase64(yourImageFile);
+    const desiredImageBase64 = await blobToBase64(desiredImageFile);
+
+    const yourImageClasses = await runModel(yourImageBase64);
+    const desiredImageClasses = await runModel(desiredImageBase64);
+
+    const chatbotInputString = `The client's image labels are: ${yourImageClasses.join(
+      ", "
+    )}. The desired image labels are: ${desiredImageClasses.join(", ")}`;
+
+    console.log("Chatbot Input: ", chatbotInputString);
+
+    try {
+      const chatbotResponse = await getResponseChatbot(chatbotInputString);
+      console.log("Chatbot Response: ", chatbotResponse);
+      // Save chatbot response to Firestore
+      await saveMessageToFirestore(chatbotResponse, "GainPlus");
+      // display chatbot response
+      setMessages((prevMessages) => [...prevMessages, chatbotResponse]);
+    } catch (error) {
+      console.error("Error sending message to chatbot:", error);
+    }
   };
 
   // Save message to Firestore
-  const saveMessageToFirestore = async (messageText) => {
+  const saveMessageToFirestore = async (messageText, senderID = auth.currentUser.uid) => {
     try {
       const authUser = auth.currentUser;
 
       if (authUser) {
         const docRef = await addDoc(collection(db, "messages"), {
           message: messageText,
-          senderID: authUser.uid,
+          senderID,
           time: new Date(),
         });
         console.log("Message saved to Firestore");
@@ -159,11 +185,36 @@ const MessageContainer = () => {
     }
   };
 
-  // Send a new message
+  const getResponseChatbot = async (message) => {
+    try {
+      const response = await axios.post(
+        'https://dbc-9b555a31-b662.cloud.databricks.com/serving-endpoints/agents_gainplus-default-gainplus-coach_model/invocations',
+        {
+          inputs: [messageText], // Send user message to chatbot
+        },
+        {
+          headers: {
+            Authorization: "Bearer TDOTWEzAa3JtoQw2BdLG",
+          },
+        }
+      );
+      console.log("Chatbot Response: ", response.data);
+      return response.data.message; // Return chatbot response
+    } catch (error) {
+      console.error("Error sending message to chatbot:", error);
+      return "Sorry, there was an error processing your request."; // Default error message
+    }
+  }
+
+  // Send a new message for chatting
   const sendMessage = async (messageText) => {
     const newMessage = { text: messageText };
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     await saveMessageToFirestore(messageText);
+    const response = await getResponseChatbot(messageText);
+
+    await saveMessageToFirestore(response, "GainPlus");
+    setMessages((prevMessages) => [...prevMessages, response]);
   };
 
   return (
