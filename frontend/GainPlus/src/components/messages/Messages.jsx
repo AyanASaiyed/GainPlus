@@ -86,6 +86,7 @@ const Messages = () => {
 //   const [current, setCurrent] = useState(null);
 
   useEffect(() => {
+    let fetchedMessages = [];
     const unsubscribe = onSnapshot(
       query(
         collection(db, "messages"),
@@ -93,7 +94,7 @@ const Messages = () => {
         orderBy("timestamp", "asc")
       ),
       (snapshot) => {
-        const fetchedMessages = snapshot.docs.map((doc) => ({
+        fetchedMessages = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
@@ -102,6 +103,10 @@ const Messages = () => {
         setMessages(fetchedMessages);
       }
     );
+
+    // if (fetchedMessages.length === 0) {
+    //   // get greeting from chatbot
+
 
     return () => unsubscribe();
   }, []);
@@ -128,7 +133,7 @@ const Messages = () => {
         {filteredMessages.map((message) => (
           <div
             key={message.id}
-            className="pl-4 pt-2 pb-2 bg-black chat-bubble mb-2 self-end"
+            className={`pl-4 pt-2 pb-2 bg-black chat-bubble mb-2 ${message.senderID === "GainPlus" ? "self-start" : "self-end"}`}
           >
             <p className="text-white">{message.text}</p>
           </div>

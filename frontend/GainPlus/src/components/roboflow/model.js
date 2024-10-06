@@ -16,7 +16,7 @@ const classMap = {
   10: "woman",
 };
 
-const blobToBase64 = (blob) => {
+export const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onloadend = () => resolve(reader.result.split(',')[1]);
@@ -25,8 +25,30 @@ const blobToBase64 = (blob) => {
     });
 };
 
+// Function to send predictions to chatbot
+const sendToChatbot = async (predictions) => {
+    try {
+      const response = await axios.post(
+        'https://dbc-9b555a31-b662.cloud.databricks.com/serving-endpoints/agents_gainplus-default-gainplus-coach_model/invocations',
+        {
+          inputs: predictions, // Send predictions array as input to the chatbot
+        },
+        {
+          headers: {
+            Authorization: `Bearer YOUR_API_TOKEN`, // Add auth token if required
+          },
+        }
+      );
+      return response.data.message; // Return chatbot response
+    } catch (error) {
+      console.error("Error sending predictions to chatbot:", error);
+      return null;
+    }
+  };
+  
+
 export const runModel = async (imgBlob) => {
-    console.log("Running model with base64 image: ", imgBlob);
+    // console.log("Running model with base64 image: ", imgBlob);
 
     axios({
         method: "POST",
@@ -64,16 +86,34 @@ export const runModel = async (imgBlob) => {
             classes.push(classMap[predarr[i].class_id]);
         }
 
-        //Send classes to the LLM chatbot through a POST request
-        //try {
+        return classes;
+
+        // Send classes to the LLM chatbot through a POST request
+        // try {
         //    const chatbotResponse = await sendClassesToChatbot(classes);
         //    console.log("Chatbot response:", chatbotResponse);
-        //} catch (error) {
+        //    return {
+        //     predictions: classes,
+        //     chatbotResponse: chatbotResponse,
+        //    };
+        // } catch (error) {
         //    console.error("Error sending to chatbot:", error);
-        //}
+        // }
+
     })
 
     .catch(function(error) {
-        console.error("Error during model inference:", error); // Log any errors
+      if (error.response) {
+          // Request made and server responded
+          console.error("Response error:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+          // Request made but no response received
+          console.error("Request error:", error.request);
+      } else {
+          // Something happened in setting up the request
+          console.error("Axios error:", error.message);
+      }
     });
 }
