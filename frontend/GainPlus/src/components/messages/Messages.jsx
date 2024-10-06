@@ -116,58 +116,58 @@ const Messages = () => {
 
   const filteredMessages = messages.filter((message) => message.text);
 
-  const [yourImage, setYourImage] = useState();
-  const [desiredImage, setDesiredImage] = useState();
-  const [confirm, setConfirm] = useState(false);
+  //   const [yourImage, setYourImage] = useState();
+  //   const [desiredImage, setDesiredImage] = useState();
+  //   const [confirm, setConfirm] = useState(false);
 
-  const handleYourImage = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const fileType = file.type;
-      if (fileType !== "image/jpeg" && fileType !== "image/png") {
-        toast.error("Please enter a jpg or png file");
-        setCorrectPic(false);
-        return;
-      } else {
-        setCorrectPic(true);
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setYourImage(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-  };
+  //   const handleYourImage = (event) => {
+  //     const file = event.target.files[0];
+  //     if (file) {
+  //       const fileType = file.type;
+  //       if (fileType !== "image/jpeg" && fileType !== "image/png") {
+  //         toast.error("Please enter a jpg or png file");
+  //         setCorrectPic(false);
+  //         return;
+  //       } else {
+  //         setCorrectPic(true);
+  //         const reader = new FileReader();
+  //         reader.onloadend = () => {
+  //           setYourImage(reader.result);
+  //         };
+  //         reader.readAsDataURL(file);
+  //       }
+  //     }
+  //   };
 
-  const handleDesiredImage = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const fileType = file.type;
-      if (fileType !== "image/jpeg" && fileType !== "image/png") {
-        toast.error("Please enter a jpg or a png file");
-        setCorrectGoalPic(false);
-      } else {
-        setCorrectGoalPic(true);
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setDesiredImage(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-  };
+  //   const handleDesiredImage = (event) => {
+  //     const file = event.target.files[0];
+  //     if (file) {
+  //       const fileType = file.type;
+  //       if (fileType !== "image/jpeg" && fileType !== "image/png") {
+  //         toast.error("Please enter a jpg or a png file");
+  //         setCorrectGoalPic(false);
+  //       } else {
+  //         setCorrectGoalPic(true);
+  //         const reader = new FileReader();
+  //         reader.onloadend = () => {
+  //           setDesiredImage(reader.result);
+  //         };
+  //         reader.readAsDataURL(file);
+  //       }
+  //     }
+  //   };
 
-  const handleConfirm = (event) => {
-    if (correctPic == true && correctGoalPic == true) {
-      setConfirm(true);
-      if (yourImage) {
-        runModel(yourImage);
-      }
-      if (desiredImage) {
-        runModel(desiredImage);
-      }
-    }
-  };
+  //   const handleConfirm = (event) => {
+  //     if (correctPic == true && correctGoalPic == true) {
+  //       setConfirm(true);
+  //       if (yourImage) {
+  //         runModel(yourImage);
+  //       }
+  //       if (desiredImage) {
+  //         runModel(desiredImage);
+  //       }
+  //     }
+  //   };
 
   return (
     <div className="flex flex-col h-full w-full overflow-y-auto">
@@ -177,7 +177,7 @@ const Messages = () => {
         Respectively!
       </div>
 
-      <div style={styles.imageGroup}>
+      {/* <div style={styles.imageGroup}>
         <div style={styles.imageContainer}>
           <div style={styles.imageStyle}>
             {!yourImage ? (
@@ -236,7 +236,7 @@ const Messages = () => {
             ? "Submit Before and After Photos"
             : "Please Enter Correct Pictures"}
         </button>
-      </div>
+      </div> */}
 
       <div className="flex-1 w-full bg-gray-900 p-4 flex flex-col items-end">
         {filteredMessages.map((message) => (
@@ -244,7 +244,6 @@ const Messages = () => {
             key={message.id}
             className="pl-4 pt-2 pb-2 bg-black chat-bubble mb-2 self-end"
           >
-            {/* Displaying text message on the container */}
             <p className="text-white">{message.text}</p>
           </div>
         ))}
