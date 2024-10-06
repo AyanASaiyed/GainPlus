@@ -1,7 +1,6 @@
 // import axios from "axios";
 
 // const chatbotEndpoint = "https://dbc-9b555a31-b662.cloud.databricks.com/serving-endpoints/agents_gainplus-default-gainplus-coach_model/invocations";
-// const api_key = "dapi6c23348424981c55abbc40973c49d0dc";
 
 // export const getChatbotResponse = async (message) => {
 //     try {
