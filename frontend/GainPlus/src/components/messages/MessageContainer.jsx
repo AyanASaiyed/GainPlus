@@ -230,6 +230,7 @@ const MessageContainer = () => {
                 <h2 style={styles.imageLabel}>Your Photo</h2>
                 <input
                   type="file"
+                  className="flex items-center justify-center"
                   onChange={(e) => setYourImageFile(e.target.files[0])}
                 />
               </div>
