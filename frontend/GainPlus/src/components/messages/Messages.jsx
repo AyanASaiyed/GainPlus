@@ -64,7 +64,6 @@ const Messages = () => {
       textAlign: "center",
       border: "2px solid white",
       padding: "10px",
-      backgroundColor: "green",
       borderRadius: "22px",
     },
     messagesContainer: {
@@ -82,6 +81,8 @@ const Messages = () => {
 
   const [messages, setMessages] = useState([]);
   const [goal, setGoal] = useState(null);
+  const [correctPic, setCorrectPic] = useState(true);
+  const [correctGoalPic, setCorrectGoalPic] = useState(true);
   const [current, setCurrent] = useState(null);
 
   useEffect(() => {
@@ -97,6 +98,7 @@ const Messages = () => {
           ...doc.data(),
         }));
         console.log(fetchedMessages);
+        console.log(auth.currentUser.uid);
         setMessages(fetchedMessages);
       }
     );
@@ -124,8 +126,10 @@ const Messages = () => {
       const fileType = file.type;
       if (fileType !== "image/jpeg" && fileType !== "image/png") {
         toast.error("Please enter a jpg or png file");
+        setCorrectPic(false);
         return;
       } else {
+        setCorrectPic(true);
         const reader = new FileReader();
         reader.onloadend = () => {
           setYourImage(reader.result);
@@ -141,7 +145,9 @@ const Messages = () => {
       const fileType = file.type;
       if (fileType !== "image/jpeg" && fileType !== "image/png") {
         toast.error("Please enter a jpg or a png file");
+        setCorrectGoalPic(false);
       } else {
+        setCorrectGoalPic(true);
         const reader = new FileReader();
         reader.onloadend = () => {
           setDesiredImage(reader.result);
@@ -152,12 +158,14 @@ const Messages = () => {
   };
 
   const handleConfirm = (event) => {
-    setConfirm(true);
-    if (yourImage) {
-      runModel(yourImage);
-    }
-    if (desiredImage) {
-      runModel(desiredImage);
+    if (correctPic == true && correctGoalPic == true) {
+      setConfirm(true);
+      if (yourImage) {
+        runModel(yourImage);
+      }
+      if (desiredImage) {
+        runModel(desiredImage);
+      }
     }
   };
 
@@ -219,9 +227,14 @@ const Messages = () => {
         <button
           title="Submit"
           style={styles.confirmLabel}
+          className={`${
+            correctPic && correctGoalPic ? "bg-green-600" : "bg-red-700"
+          }`}
           onClick={handleConfirm}
         >
-          Submit Before and After Photos
+          {correctPic
+            ? "Submit Before and After Photos"
+            : "Please Enter Correct Pictures"}
         </button>
       </div>
 
