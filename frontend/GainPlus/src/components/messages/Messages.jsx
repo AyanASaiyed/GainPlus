@@ -80,10 +80,10 @@ const Messages = () => {
   };
 
   const [messages, setMessages] = useState([]);
-  const [goal, setGoal] = useState(null);
-  const [correctPic, setCorrectPic] = useState(true);
-  const [correctGoalPic, setCorrectGoalPic] = useState(true);
-  const [current, setCurrent] = useState(null);
+//   const [goal, setGoal] = useState(null);
+//   const [correctPic, setCorrectPic] = useState(true);
+//   const [correctGoalPic, setCorrectGoalPic] = useState(true);
+//   const [current, setCurrent] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -106,68 +106,15 @@ const Messages = () => {
     return () => unsubscribe();
   }, []);
 
-  function handleGoal(e) {
-    setGoal(URL.createObjectURL(e.target.files[0]));
-  }
+//   function handleGoal(e) {
+//     setGoal(URL.createObjectURL(e.target.files[0]));
+//   }
 
-  function handleCurrent(e) {
-    setCurrent(URL.createObjectURL(e.target.files[0]));
-  }
+//   function handleCurrent(e) {
+//     setCurrent(URL.createObjectURL(e.target.files[0]));
+//   }
 
   const filteredMessages = messages.filter((message) => message.text);
-
-  //   const [yourImage, setYourImage] = useState();
-  //   const [desiredImage, setDesiredImage] = useState();
-  //   const [confirm, setConfirm] = useState(false);
-
-  //   const handleYourImage = (event) => {
-  //     const file = event.target.files[0];
-  //     if (file) {
-  //       const fileType = file.type;
-  //       if (fileType !== "image/jpeg" && fileType !== "image/png") {
-  //         toast.error("Please enter a jpg or png file");
-  //         setCorrectPic(false);
-  //         return;
-  //       } else {
-  //         setCorrectPic(true);
-  //         const reader = new FileReader();
-  //         reader.onloadend = () => {
-  //           setYourImage(reader.result);
-  //         };
-  //         reader.readAsDataURL(file);
-  //       }
-  //     }
-  //   };
-
-  //   const handleDesiredImage = (event) => {
-  //     const file = event.target.files[0];
-  //     if (file) {
-  //       const fileType = file.type;
-  //       if (fileType !== "image/jpeg" && fileType !== "image/png") {
-  //         toast.error("Please enter a jpg or a png file");
-  //         setCorrectGoalPic(false);
-  //       } else {
-  //         setCorrectGoalPic(true);
-  //         const reader = new FileReader();
-  //         reader.onloadend = () => {
-  //           setDesiredImage(reader.result);
-  //         };
-  //         reader.readAsDataURL(file);
-  //       }
-  //     }
-  //   };
-
-  //   const handleConfirm = (event) => {
-  //     if (correctPic == true && correctGoalPic == true) {
-  //       setConfirm(true);
-  //       if (yourImage) {
-  //         runModel(yourImage);
-  //       }
-  //       if (desiredImage) {
-  //         runModel(desiredImage);
-  //       }
-  //     }
-  //   };
 
   return (
     <div className="flex flex-col h-full w-full overflow-y-auto">
@@ -176,67 +123,6 @@ const Messages = () => {
         Please Enter Images of your Current Physique and Goal Physique,
         Respectively!
       </div>
-
-      {/* <div style={styles.imageGroup}>
-        <div style={styles.imageContainer}>
-          <div style={styles.imageStyle}>
-            {!yourImage ? (
-              <>
-                <div style={styles.newImageUpload}>
-                  <h2 style={styles.imageLabel}>Your Photo</h2>
-                  <input type="file" onChange={handleYourImage}></input>
-                </div>
-              </>
-            ) : (
-              <>
-                <div style={styles.uploadedImageContainer}>
-                  <img style={styles.image} src={yourImage} />
-                  <h2>Change Photo</h2>
-                  <input
-                    type="file"
-                    onChange={handleYourImage}
-                    style={styles.fileInput}
-                  ></input>
-                </div>
-              </>
-            )}
-          </div>
-          <div style={styles.imageStyle}>
-            {!desiredImage ? (
-              <>
-                <div style={styles.newImageUpload}>
-                  <h2 style={styles.imageLabel}>Desired Photo</h2>
-                  <input type="file" onChange={handleDesiredImage}></input>
-                </div>
-              </>
-            ) : (
-              <>
-                <div style={styles.uploadedImageContainer}>
-                  <img style={styles.image} src={desiredImage} />
-                  <h2>Change Photo</h2>
-                  <input
-                    type="file"
-                    onChange={handleDesiredImage}
-                    style={styles.fileInput}
-                  ></input>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-        <button
-          title="Submit"
-          style={styles.confirmLabel}
-          className={`${
-            correctPic && correctGoalPic ? "bg-green-600" : "bg-red-700"
-          }`}
-          onClick={handleConfirm}
-        >
-          {correctPic
-            ? "Submit Before and After Photos"
-            : "Please Enter Correct Pictures"}
-        </button>
-      </div> */}
 
       <div className="flex-1 w-full bg-gray-900 p-4 flex flex-col items-end">
         {filteredMessages.map((message) => (

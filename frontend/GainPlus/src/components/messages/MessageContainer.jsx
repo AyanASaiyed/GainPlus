@@ -122,7 +122,7 @@ const MessageContainer = () => {
     if (yourImageFile) {
       const yourImageRef = ref(
         imageDb,
-        `yourImage/${yourImageFile.name + v4()}`
+        `${auth.currentUser.uid}/yourImage/${yourImageFile.name + v4()}`
       );
       await uploadBytes(yourImageRef, yourImageFile);
       const yourImageURL = await getDownloadURL(yourImageRef);
@@ -131,7 +131,7 @@ const MessageContainer = () => {
     if (desiredImageFile) {
       const desiredImageRef = ref(
         imageDb,
-        `desiredImage/${desiredImageFile.name + v4()}`
+        `${auth.currentUser.uid}/desiredImage/${desiredImageFile.name + v4()}`
       );
       await uploadBytes(desiredImageRef, desiredImageFile);
       const desiredImageURL = await getDownloadURL(desiredImageRef);
