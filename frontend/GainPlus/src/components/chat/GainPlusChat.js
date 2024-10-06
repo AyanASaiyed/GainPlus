@@ -1,4 +1,5 @@
 import axios from "axios";
+import axios from "axios";
 
 // Define the chatbot endpoint
 const chatbotEndpoint = "https://dbc-9b555a31-b662.cloud.databricks.com/serving-endpoints/agents_gainplus-default-gainplus-coach_model/invocations";
