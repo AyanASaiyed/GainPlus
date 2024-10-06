@@ -102,13 +102,11 @@ const MessageContainer = () => {
 
   return (
     <div
-      className="border text-md rounded-t-lg w-full overflow-y-scroll p-4 bg-gray-900 text-white"
+      className="border text-md rounded-t-lg w-full p-4 bg-gray-900 text-white"
       style={styles.container}
     >
       <div style={styles.messagesContainer}>
-        
         <Messages messages={messages} />
-        
       </div>
 
       <div style={styles.inputContainer}>

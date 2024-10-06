@@ -22,7 +22,7 @@ const Home = () => {
         </button>
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full rounded-sm">
-        <MessageContainer />{" "}
+        <MessageContainer />
       </div>
     </section>
   );
