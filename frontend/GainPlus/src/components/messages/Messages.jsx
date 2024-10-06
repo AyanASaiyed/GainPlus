@@ -174,6 +174,78 @@ const Messages = () => {
 
   const filteredMessages = messages.filter((message) => message.text);
 
+    const [yourImage, setYourImage] = useState();
+    const [desiredImage, setDesiredImage] = useState();
+    const [confirm, setConfirm] = useState(false);
+
+//      COMMENT THIS HANDLER AFTER   
+    const handleYourImage = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const fileType = file.type;
+        if (fileType !== "image/jpeg" && fileType !== "image/png") {
+          toast.error("Please enter a jpg or png file");
+          setCorrectPic(false);
+          return;
+        } else {
+          setCorrectPic(true);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setYourImage(reader.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    };
+
+  //   const handleDesiredImage = (event) => {
+  //     const file = event.target.files[0];
+  //     if (file) {
+  //       const fileType = file.type;
+  //       if (fileType !== "image/jpeg" && fileType !== "image/png") {
+  //         toast.error("Please enter a jpg or a png file");
+  //         setCorrectGoalPic(false);
+  //       } else {
+  //         setCorrectGoalPic(true);
+  //         const reader = new FileReader();
+  //         reader.onloadend = () => {
+  //           setDesiredImage(reader.result);
+  //         };
+  //         reader.readAsDataURL(file);
+  //       }
+  //     }
+  //   };
+
+    const handleConfirm = (event) => {
+      if (correctPic == true && correctGoalPic == true) {
+        setConfirm(true);
+        // if (yourImage) {
+        //   runModel(yourImage);
+        // }
+        // if (desiredImage) {
+        //   runModel(desiredImage);
+        // }
+        if (yourImageFile) {
+            const yourImageRef = ref(
+              imageDb,
+              yourImage/${yourImageFile.name + v4()}
+            );
+            await uploadBytes(yourImageRef, yourImageFile);
+            const yourImageURL = await getDownloadURL(yourImageRef);
+            setYourImage(yourImageURL);
+          }
+          if (desiredImageFile) {
+            const desiredImageRef = ref(
+              imageDb,
+              desiredImage/${desiredImageFile.name + v4()}
+            );
+            await uploadBytes(desiredImageRef, desiredImageFile);
+            const desiredImageURL = await getDownloadURL(desiredImageRef);
+            setDesiredImage(desiredImageURL);
+          }
+      }
+    };
+
   return (
     <div className="flex flex-col h-full w-full overflow-y-scroll chat absolute">
       {/* ENTRY MESSAGE HERE */}

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import Message from "./Message";
 import Messages from "./Messages";
+import { imageDb } from "../../firebase/firebase";
+import { v4 } from "uuid";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import MessageInput from "./MessageInput";
+import { auth, db } from "../../firebase/firebase";
+import { collection, addDoc } from "firebase/firestore";
+import toast from "react-hot-toast";
 import { runModel } from "../roboflow/model";
 
 const MessageContainer = () => {
@@ -59,16 +66,47 @@ const MessageContainer = () => {
 
   const [yourImage, setYourImage] = useState();
   const [desiredImage, setDesiredImage] = useState();
-  const [confirm, setConfirm]= useState(false);
-  function handleYourImage(e) {
-    console.log(e.target.files);
-    setYourImage(URL.createObjectURL(e.target.files[0]));
-  };
-  function handleDesiredImage(e) {
-    console.log(e.target.files);
-    setDesiredImage(URL.createObjectURL(e.target.files[0]));
-  };
-   function handleConfirm(e){
+  const [yourImageFile, setYourImageFile] = useState();
+  const [desiredImageFile, setDesiredImageFile] = useState();
+  const [confirm, setConfirm] = useState(false);
+  const [messages, setMessages] = useState([]);
+
+  // Fetch images from Firebase on component mount
+  useEffect(() => {
+    const imageFetching = async () => {
+      try {
+        if (
+          yourImageList.items.length > 0 &&
+          desiredImageList.items.length > 0
+        ) {
+          setConfirm(true);
+        }
+
+        const yourImageRef = ref(imageDb, "yourImage");
+        const yourImageList = await listAll(yourImageRef);
+        if (yourImageList.items.length > 0) {
+          const yourImageFound = await getDownloadURL(yourImageList.items[0]);
+          setYourImage(yourImageFound);
+        }
+
+        const desiredImageRef = ref(imageDb, "desiredImage");
+        const desiredImageList = await listAll(desiredImageRef);
+        if (desiredImageList.items.length > 0) {
+          const desiredImageFound = await getDownloadURL(
+            desiredImageList.items[0]
+          );
+          setDesiredImage(desiredImageFound);
+        }
+      } catch (error) {
+        console.log("Error fetching images:", error);
+      }
+    };
+
+    imageFetching();
+  }, []);
+
+  // Handle image confirmation and upload
+  const handleConfirm = async () => {
     setConfirm(true);
     if (yourImage) {
       runModel(yourImage);
