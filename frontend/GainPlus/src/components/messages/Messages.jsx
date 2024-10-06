@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, onSnapshot, query, where, orderBy } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
 import { auth } from "../../firebase/firebase"; // Import the auth object
 import { runModel } from "../roboflow/model";
 
@@ -24,41 +30,41 @@ const Messages = () => {
       height: "200px",
       borderStyle: "dashed",
       display: "flex",
-      flexDirection:"column",
-      alignItems:"center",
-      justifyContent:"center",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
     imageContainer: {
       display: "flex",
     },
-    uploadedImageContainer:{
-      flexDirection:"column",
-      justifyContent:"left",
+    uploadedImageContainer: {
+      flexDirection: "column",
+      justifyContent: "left",
     },
-    newImageUpload:{
-      display:"flex",
-      flexDirection:"column",
-      alignItems:"center",
-      justifyContent:"center",
+    newImageUpload: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
-    imageLabel:{
-      fontSize:"30px",
+    imageLabel: {
+      fontSize: "30px",
       marginBottom: "10px",
     },
-    imageGroup:{
-      display:"flex",
-      flexDirection:"column",
-      justifyContent:"flex-end",
+    imageGroup: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-end",
       //flexDirection:"row",
-      alignItems:"flex-end",
+      alignItems: "flex-end",
     },
-    confirmLabel:{
-      marginTop:"10px",
-      textAlign:"center",
-      border:"2px solid white",
-      padding:"10px",
-      backgroundColor:"green",
-      borderRadius:"22px"
+    confirmLabel: {
+      marginTop: "10px",
+      textAlign: "center",
+      border: "2px solid white",
+      padding: "10px",
+      backgroundColor: "green",
+      borderRadius: "22px",
     },
     messagesContainer: {
       flex: 1,
@@ -109,8 +115,8 @@ const Messages = () => {
 
   const [yourImage, setYourImage] = useState();
   const [desiredImage, setDesiredImage] = useState();
-  const [confirm, setConfirm]= useState(false);
-  
+  const [confirm, setConfirm] = useState(false);
+
   const handleYourImage = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -133,7 +139,7 @@ const Messages = () => {
     }
   };
 
-  const handleConfirm = (event) =>{
+  const handleConfirm = (event) => {
     setConfirm(true);
     if (yourImage) {
       runModel(yourImage);
@@ -147,7 +153,8 @@ const Messages = () => {
     <div className="flex flex-col h-full w-full overflow-y-auto">
       {/* ENTRY MESSAGE HERE */}
       <div className="pl-4 pt-1 pb-6 rounded-lg bg-black chat-bubble chat-start">
-        Please Enter Images of your Goal and Current Physique!
+        Please Enter Images of your Current Physique and Goal Physique,
+        Respectively!
       </div>
 
       <div style={styles.imageGroup}>
@@ -155,17 +162,21 @@ const Messages = () => {
           <div style={styles.imageStyle}>
             {!yourImage ? (
               <>
-              <div style={styles.newImageUpload}>
-                <h2 style={styles.imageLabel}>Your Photo</h2>
-                <input type="file" onChange={handleYourImage}></input>
+                <div style={styles.newImageUpload}>
+                  <h2 style={styles.imageLabel}>Your Photo</h2>
+                  <input type="file" onChange={handleYourImage}></input>
                 </div>
               </>
             ) : (
               <>
-              <div style={styles.uploadedImageContainer}>
-                <img style={styles.image} src={yourImage} />
-                <h2 >Change Photo</h2>
-                <input type="file" onChange={handleYourImage} style={styles.fileInput}></input>
+                <div style={styles.uploadedImageContainer}>
+                  <img style={styles.image} src={yourImage} />
+                  <h2>Change Photo</h2>
+                  <input
+                    type="file"
+                    onChange={handleYourImage}
+                    style={styles.fileInput}
+                  ></input>
                 </div>
               </>
             )}
@@ -173,24 +184,33 @@ const Messages = () => {
           <div style={styles.imageStyle}>
             {!desiredImage ? (
               <>
-              <div style={styles.newImageUpload}>
-                <h2 style={styles.imageLabel}>Desired Photo</h2>
-                <input type="file" onChange={handleDesiredImage}></input>
+                <div style={styles.newImageUpload}>
+                  <h2 style={styles.imageLabel}>Desired Photo</h2>
+                  <input type="file" onChange={handleDesiredImage}></input>
                 </div>
               </>
             ) : (
               <>
-              <div style={styles.uploadedImageContainer}>
-                <img style={styles.image} src={desiredImage} />
-                <h2>Change Photo</h2>
-                <input type="file" onChange={handleDesiredImage} style={styles.fileInput}></input>
+                <div style={styles.uploadedImageContainer}>
+                  <img style={styles.image} src={desiredImage} />
+                  <h2>Change Photo</h2>
+                  <input
+                    type="file"
+                    onChange={handleDesiredImage}
+                    style={styles.fileInput}
+                  ></input>
                 </div>
               </>
             )}
           </div>
-          
         </div>
-        <button title="Submit" style={styles.confirmLabel} onClick={handleConfirm}>Submit Before and After Photos</button>
+        <button
+          title="Submit"
+          style={styles.confirmLabel}
+          onClick={handleConfirm}
+        >
+          Submit Before and After Photos
+        </button>
       </div>
 
       <div className="flex-1 w-full bg-gray-900 p-4 flex flex-col items-end">
