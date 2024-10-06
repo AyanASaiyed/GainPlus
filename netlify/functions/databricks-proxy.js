@@ -4,6 +4,7 @@ var axios = require('axios');
 
 // Define the chatbot endpoint
 const chatbotEndpoint = "https://dbc-9b555a31-b662.cloud.databricks.com/serving-endpoints/agents_gainplus-default-gainplus-coach_model/invocations";
+// Define the API key
 const apiKey = "dapi6c23348424981c55abbc40973c49d0dc";
 
 // Define the uploadData function
